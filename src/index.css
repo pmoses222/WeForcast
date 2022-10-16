@@ -1,0 +1,21 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;700&display=swap');
+
+*{
+  font-family: 'Merriweather Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+  
+}  
+
+:root{
+  --mainfont: 'Merriweather Sans', sans-serif;
+  --bold-font: 700;
+  --light-font:400;
+  --primary-color:rgb(255, 255, 255);
+  --secondary-color:rgb(0, 3, 63);
+  --bg:linear-gradient( rgb(6, 41, 105), rgb(47, 105, 212))
+  
+}
