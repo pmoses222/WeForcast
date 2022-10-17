@@ -19,7 +19,7 @@ function Main({handleChange,query,fetchdata,result,err}) {
  
   return (
     <> 
-    { result ? 
+   
    <MainContainer>
       <SectionContainer>
         <div className="navigation">
@@ -135,7 +135,7 @@ function Main({handleChange,query,fetchdata,result,err}) {
                 </div>
            </div>
       </AsideContainer>  
-    </MainContainer> : <div>{err}</div>}
+    </MainContainer> 
    </> 
    )
 }
