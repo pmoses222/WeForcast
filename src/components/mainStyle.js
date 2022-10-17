@@ -10,7 +10,7 @@ background:#e8eaf5;
 `
 
 export const SectionContainer = styled.div`
-margin:40px 70px;
+margin:40px 30px;
 width:100%;
 
 .navigation{
@@ -102,11 +102,11 @@ width:100%;
 
   .forecast-cards{
    display:grid;
-   grid-template-columns:repeat(8,1fr);
-   gap:10px;
+   grid-template-columns:repeat(6,0.3fr);
+   gap:5px;
     .forecast-details{
       background:#f5f5f5;
-      padding:35px;
+      padding:20px;
       text-align:center;
       color:var(--secondary-color);
       opacity:0.9;
@@ -118,12 +118,16 @@ width:100%;
       }
 
       .forecast-icons{
-        width:100px;
-        height:100px;
+        png{
+          width:50px;
+          height:50px;
+        }
+        
       } 
       
       .forecast-temp{
-        font-size:2rem;
+        font-size:1rem;
+        font-weight:var(--bold-font);
       }
 
 

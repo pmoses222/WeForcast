@@ -6,11 +6,17 @@ import { FaSistrix,FaStreetView,FaTemperatureHigh } from "react-icons/fa"
 import { WiHumidity, WiWindy,WiSunset,WiSunrise} from "react-icons/wi"
 
 function Main({handleChange,query,fetchdata,result,err}) {
+
   const today = moment().format('LL');
   const currentTime = moment().format('LT');
- /*  const now = DateTime.local()
-  const dateFormatted = now.toFormat("EEEE',' MMMM d'");
-  */
+  const sunRise = moment.utc(result.city && result.city.sunrise,'X').add(3600,'seconds').format('HH:mm a');
+  const sunSet = moment.utc(result.city && result.city.sunset,'X').add(3600,'seconds').format('HH:mm a');
+  const icon = result.list.weather[0].icon
+
+  console.log(icon)
+
+ 
+ 
   return (
     <> 
     { result ? 
@@ -70,50 +76,21 @@ function Main({handleChange,query,fetchdata,result,err}) {
         <div className="forecast">
           <h1 className="forecast-title">3 Hourly Forecast</h1>
           <div className="forecast-cards">
-             <div className="forecast-details">
-               <p className="forecast-date"> 0.00</p>
-               <span className="forecast-icons"></span>
-               <div className="forecast-temp">32 &#8451;</div>
-               <div className="forecast-desc">Few clouds</div>
-            </div>
-
-             <div className="forecast-details">
-              <p className="forecast-date"> 3.00</p>
-              <span className="forecast-icons"></span>
-              <div className="forecast-temp">32 &#8451;</div>
-              <div className="forecast-desc">Few clouds</div>
-            </div>
-
-            <div className="forecast-details">
-              <p className="forecast-date"> 6.00</p>
-              <span className="forecast-icons"></span>
-              <div className="forecast-temp">32 &#8451;</div>
-              <div className="forecast-desc">Few clouds</div>
-           </div>
-
-            <div className="forecast-details">
-              <p className="forecast-date"> 9.00</p>
-              <span className="forecast-icons"></span>
-              <div className="forecast-temp">32 &#8451;</div>
-              <div className="forecast-desc">Few clouds</div>
-           </div>
-
-           <div className="forecast-details">
-             <p className="forecast-date"> 12.00</p>
-             <span className="forecast-icons"></span>
-             <div className="forecast-temp">32 &#8451;</div>
-             <div className="forecast-desc">Few clouds</div>
-           </div>
-
-           <div className="forecast-details">
-             <p className="forecast-date"> 12.00</p>
-             <span className="forecast-icons"></span>
-             <div className="forecast-temp">32 &#8451;</div>
-             <div className="forecast-desc">Few clouds</div>
-           </div>
+             
+              {result.list && result.list.map((forecast,index) =>(
+               <div className="forecast-details" key={index}>
+                  <p className="forecast-date">{forecast.dt_txt.slice(11,16)}</p>
+                  <div className="forecast-temp">{Math.round(forecast.main.temp)} &#8451;</div>
+                  <img src={`http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`} 
+                  alt="" className="forcast-icons" />
+                  <div className="forecast-desc">{forecast.weather[0].description}</div>
+                  
+               </div>
+               ))}
+           
          </div>
       </div>
-
+     
       </SectionContainer>
 
       <AsideContainer>
@@ -129,7 +106,8 @@ function Main({handleChange,query,fetchdata,result,err}) {
                     <div className='display-description'>
                       {result.list && result.list[0].weather[0].main}
                     </div>
-                    <img src="" alt="logo" className='display-image'/>
+                    <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+                    alt="logo" className='display-image'/>
                     <div className='display-figure'>
                       {result.list && result.list[0].main.temp} degrees
                     </div>
@@ -143,7 +121,7 @@ function Main({handleChange,query,fetchdata,result,err}) {
                    <span  className ="card-icon"><WiSunrise /></span>
                     <div className="card-details">
                          <div className='card-header'>Sunrise</div>
-                         <div className='card-figure'>{result.city && result.city.sunrise}</div>
+                         <div className='card-figure'>{sunRise}</div>
                    </div>
                  </div>
 
@@ -151,7 +129,7 @@ function Main({handleChange,query,fetchdata,result,err}) {
                    <span  className ="card-icon"><WiSunset /></span>
                     <div className="card-details">
                          <div className='card-header'>Sunset</div>
-                         <div className='card-figure'>{result.city && result.city.sunset}</div>
+                         <div className='card-figure'>{sunSet}</div>
                    </div>
                 </div>
                 </div>
