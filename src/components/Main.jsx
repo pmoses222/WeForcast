@@ -144,9 +144,7 @@ function Main({handleChange,query,fetchdata,result,isloading}) {
    }
  }
 
- 
- 
-  return (
+ return (
     <> 
      {getPage()}
    </> 
