@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from "moment"
+import {motion} from "framer-motion"
 
 import {MainContainer,SectionContainer,AsideContainer} from "./mainStyle"
 import { FaSistrix,FaStreetView,FaTemperatureHigh } from "react-icons/fa"
@@ -20,7 +21,11 @@ function Main({handleChange,query,fetchdata,result,err}) {
   return (
     <> 
    
-   <MainContainer>
+   <MainContainer as = {motion.div} 
+      initial = {{opacity:0}} 
+      animate ={{opacity:1 ,transition: { duration: 0.5 }}}
+      exit ={{opacity:0}} 
+     >
       <SectionContainer>
         <div className="navigation">
           <div className="nav-header">

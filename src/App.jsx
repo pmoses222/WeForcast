@@ -6,6 +6,7 @@ import Loader from "./components/Loader"
 
 
 
+
 function App() {
   const [query, setQuery] = useState("lagos");
   const [result , setResult] = useState({})
