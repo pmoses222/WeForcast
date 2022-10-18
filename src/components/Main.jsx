@@ -1,32 +1,29 @@
 import React from 'react'
 import moment from "moment"
 import {motion} from "framer-motion"
+import Loader from "./Loader"
 
 import {MainContainer,SectionContainer,AsideContainer} from "./mainStyle"
 import { FaSistrix,FaStreetView,FaTemperatureHigh } from "react-icons/fa"
 import { WiHumidity, WiWindy,WiSunset,WiSunrise} from "react-icons/wi"
 
-function Main({handleChange,query,fetchdata,result,err}) {
-
+function Main({handleChange,query,fetchdata,result,isloading}) {
   const today = moment().format('LL');
   const currentTime = moment().format('LT');
   const sunRise = moment.utc(result.city && result.city.sunrise,'X').add(3600,'seconds').format('HH:mm a');
   const sunSet = moment.utc(result.city && result.city.sunset,'X').add(3600,'seconds').format('HH:mm a');
  /*  const icon = result && result.list.weather[0].icon */
 
- 
-
- 
- 
-  return (
-    <> 
-   
-   <MainContainer as = {motion.div} 
-      initial = {{opacity:0}} 
-      animate ={{opacity:1 ,transition: { duration: 0.5 }}}
-      exit ={{opacity:0}} 
-     >
-      <SectionContainer>
+ const getPage = () =>{
+   if(isloading){
+    return <Loader />
+   }else{
+     return(
+     <MainContainer as = {motion.div} 
+         initial = {{opacity:0}} 
+         animate ={{opacity:1 ,transition: { duration: 0.5 }}}
+         exit ={{opacity:0}} >
+     <SectionContainer>
         <div className="navigation">
           <div className="nav-header">
            <p>{today}</p>
@@ -114,10 +111,10 @@ function Main({handleChange,query,fetchdata,result,err}) {
                     {/* <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
                     alt="logo" className='display-image'/> */}
                     <div className='display-figure'>
-                      {result.list && result.list[0].main.temp} degrees
+                      {result.list && result.list[0].main.temp} &#8451;
                     </div>
                     <p className='display-description'>
-                      Feels like { result.list && result.list[0].main.feels_like}  degrees 
+                      Feels like { result.list && result.list[0].main.feels_like} &#8451; 
                     </p>
                 </div>
 
@@ -139,8 +136,19 @@ function Main({handleChange,query,fetchdata,result,err}) {
                 </div>
                 </div>
            </div>
-      </AsideContainer>  
-    </MainContainer> 
+      </AsideContainer>
+      </MainContainer>  
+     )
+     
+
+   }
+ }
+
+ 
+ 
+  return (
+    <> 
+     {getPage()}
    </> 
    )
 }

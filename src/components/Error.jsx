@@ -1,19 +1,19 @@
 import React from 'react'
-import styled from "styled-components"
+import {ErrorContainer} from "./errorStyles"
 
-function Error({error}) {
+function Error({err}) {
 
-    const ErrorContainer = styled`
-    margin:300px 600px;
-    `
+    
   return (
     <ErrorContainer>
-        <div className = "error">{error}</div>
+        <div className = "error"> Ops ! No such city is found !<br/>{err}</div>
     </ErrorContainer>
       
      
     
   )
+
+  
 }
 
 export default Error

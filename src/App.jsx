@@ -1,8 +1,10 @@
 
-import React,{useState} from 'react';
-import axios from "axios"
-import Main from "./components/Main"
-import Loader from "./components/Loader"
+import React,{useState} from 'react'
+import axios from "axios";
+import Main from "./components/Main";
+import Error from "./components/Error";
+
+
 
 
 
@@ -10,8 +12,8 @@ import Loader from "./components/Loader"
 function App() {
   const [query, setQuery] = useState("lagos");
   const [result , setResult] = useState({})
-  const [isloading , setIsloading] = useState(false)
   const [ errMessage, setErrorMessage ] = useState("")
+  const [isloading , setIsloading] = useState(false)
   const units ="metric"
   const Url = `https://api.openweathermap.org/data/2.5/forecast?q=${query}
    &appid=${process.env.REACT_APP_API_KEY}&units=${units}&cnt=6`
@@ -43,13 +45,14 @@ const fetchdata = async ()=> {
 
 return (
     <div className="App">
-         {  isloading ? <Loader /> : 
+         {  errMessage ? <Error err = {errMessage} /> : 
          (<Main 
             handleChange={handleChange}
             fetchdata={fetchdata}
             query = {query}
             result = {result}
-            err = {errMessage}/>) 
+            isloading ={isloading}
+            />) 
          
          }        
    </div>
